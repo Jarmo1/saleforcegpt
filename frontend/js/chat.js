@@ -17,7 +17,7 @@ sendBtn.addEventListener('click', async () => {
   addMessage('user', message)
   userInput.value = ''
 
-  const response = await fetch('https://olivedrab-caterpillar-106442.hostingersite.com/chat', {
+  const response = await fetch('/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message })
