@@ -1,0 +1,12 @@
+import express from 'express'
+import { runAgent } from '../services/openaiAgent.js'
+
+const router = express.Router()
+
+router.post('/', async (req, res) => {
+  const userMessage = req.body.message
+  const result = await runAgent(userMessage)
+  res.json(result)
+})
+
+export default router
