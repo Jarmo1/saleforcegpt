@@ -8,7 +8,7 @@ document.getElementById('connectBtn').addEventListener('click', async () => {
   }
 
   try {
-    const res = await fetch('http://38.255.40.35:3001/api/store-credentials', {
+    const res = await fetch('/api/store-credentials', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clientId, clientSecret })
@@ -16,7 +16,7 @@ document.getElementById('connectBtn').addEventListener('click', async () => {
 
     const result = await res.json()
     if (result.success) {
-      window.location.href = 'http://38.255.40.35:3001/oauth/init'
+      window.location.href = '/oauth/init'
     } else {
       alert('Failed to store credentials. Please try again.')
     }
