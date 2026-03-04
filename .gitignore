@@ -1,0 +1,16 @@
+# Salesforce DX
+.sfdx/
+.localdevserver/
+.sf/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# Environment files (never commit credentials)
+.env
+.env.local
+config/local.json

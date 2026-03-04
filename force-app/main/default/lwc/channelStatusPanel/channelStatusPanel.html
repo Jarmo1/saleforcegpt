@@ -1,0 +1,37 @@
+<template>
+    <div class="channel-panel">
+        <h3 class="slds-text-heading_small slds-m-bottom_small">Connected Channels</h3>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading channels" size="small"></lightning-spinner>
+        </template>
+        <template if:false={isLoading}>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <template for:each={channels} for:item="ch">
+                    <div key={ch.id} class="slds-col slds-size_1-of-2 slds-large-size_1-of-4 slds-m-bottom_small">
+                        <div class={ch.cardClass}>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_xx-small">
+                                <div class="slds-col slds-no-flex">
+                                    <lightning-icon
+                                        icon-name={ch.icon}
+                                        size="small"
+                                        class={ch.iconClass}>
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-col">
+                                    <p class="slds-text-heading_small">{ch.platform}</p>
+                                    <p class="slds-text-body_small slds-truncate">{ch.pageName}</p>
+                                </div>
+                                <div class="slds-col slds-no-flex">
+                                    <lightning-badge
+                                        label={ch.statusLabel}
+                                        class={ch.badgeClass}>
+                                    </lightning-badge>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

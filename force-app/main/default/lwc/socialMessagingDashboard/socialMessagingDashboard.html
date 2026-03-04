@@ -1,0 +1,114 @@
+<template>
+    <lightning-card title="Social Messaging Dashboard" icon-name="standard:social">
+        <div class="slds-p-around_medium">
+
+            <!-- Channel Status Panel -->
+            <c-channel-status-panel></c-channel-status-panel>
+
+            <div class="slds-grid slds-gutters slds-m-top_medium">
+
+                <!-- Left: Conversation list -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:messaging_conversation_detail"
+                                                    size="small">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Open Conversations</span>
+                                        <lightning-badge label={openCaseCount}
+                                                        class="slds-m-left_x-small">
+                                        </lightning-badge>
+                                    </h2>
+                                </div>
+                            </header>
+
+                            <!-- Filter by platform -->
+                            <div class="slds-no-flex">
+                                <lightning-combobox
+                                    name="platformFilter"
+                                    label="Filter"
+                                    variant="label-hidden"
+                                    value={selectedPlatform}
+                                    options={platformOptions}
+                                    onchange={handlePlatformFilter}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+
+                        <div class="slds-card__body">
+                            <template if:true={isLoadingCases}>
+                                <lightning-spinner alternative-text="Loading" size="small">
+                                </lightning-spinner>
+                            </template>
+
+                            <template if:false={isLoadingCases}>
+                                <template if:true={hasCases}>
+                                    <ul class="conversation-list">
+                                        <template for:each={filteredCases} for:item="c">
+                                            <li key={c.id}
+                                                class={c.listItemClass}
+                                                onclick={handleSelectCase}
+                                                data-id={c.id}>
+                                                <div class="slds-grid slds-gutters_xx-small">
+                                                    <div class="slds-col">
+                                                        <p class="slds-text-heading_small slds-truncate">
+                                                            {c.contactName}
+                                                        </p>
+                                                        <p class="slds-text-body_small slds-truncate">
+                                                            {c.subject}
+                                                        </p>
+                                                    </div>
+                                                    <div class="slds-col slds-no-flex">
+                                                        <lightning-badge
+                                                            label={c.platform}
+                                                            class={c.platformBadgeClass}>
+                                                        </lightning-badge>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                <template if:false={hasCases}>
+                                    <div class="slds-illustration slds-illustration_small slds-p-around_medium">
+                                        <p class="slds-text-body_regular slds-text-color_weak">
+                                            No open conversations.
+                                        </p>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Conversation thread -->
+                <div class="slds-col slds-size_2-of-3">
+                    <template if:true={selectedCaseId}>
+                        <c-conversation-thread
+                            case-id={selectedCaseId}
+                            platform={selectedPlatformName}
+                            onclose={handleCloseConversation}>
+                        </c-conversation-thread>
+                    </template>
+                    <template if:false={selectedCaseId}>
+                        <div class="slds-box slds-theme_shade slds-text-align_center slds-p-around_xx-large">
+                            <lightning-icon icon-name="utility:comments" size="large"
+                                           class="slds-m-bottom_medium">
+                            </lightning-icon>
+                            <p class="slds-text-heading_medium">Select a conversation</p>
+                            <p class="slds-text-body_regular slds-text-color_weak">
+                                Choose a conversation from the list to start messaging.
+                            </p>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+    </lightning-card>
+</template>

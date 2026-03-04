@@ -1,0 +1,46 @@
+.thread-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.thread-body {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+.msg-bubble {
+    display: flex;
+    margin-bottom: 0.75rem;
+}
+
+.msg-inbound  { justify-content: flex-start; }
+.msg-outbound { justify-content: flex-end; }
+
+.bubble-inner {
+    max-width: 70%;
+    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+    word-wrap: break-word;
+}
+
+.inbound-inner {
+    background-color: #ffffff;
+    border: 1px solid #d8d8d8;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.outbound-inner {
+    background-color: #0176d3;
+    color: #ffffff;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.msg-meta {
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+    opacity: 0.7;
+}

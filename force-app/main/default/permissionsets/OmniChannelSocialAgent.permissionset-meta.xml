@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants agents access to the Social Messaging Dashboard and Omni-Channel social messaging features.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Omni-Channel Social Agent</label>
+    <userLicense>Salesforce</userLicense>
+
+    <!-- Apex class access -->
+    <classAccesses>
+        <apexClass>SocialMessagingController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OmniChannelRoutingService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+
+    <!-- LWC / Visualforce access not needed - LWC exposed via App Builder -->
+
+    <!-- Object permissions -->
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Social_Channel_Config__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+
+    <!-- Field permissions on Case -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Platform__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Platform_User_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Last_External_Message_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- Field permissions on Contact -->
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Social_Platform_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Social_Platform__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+</PermissionSet>

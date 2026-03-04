@@ -1,0 +1,38 @@
+.conversation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.conversation-item {
+    border-bottom: 1px solid #e4e6eb;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.conversation-item:hover {
+    background-color: #f3f4f6;
+}
+
+.conversation-item.is-selected {
+    background-color: #e8f4fd;
+    border-left: 3px solid #0176d3;
+}
+
+/* Platform badge colours */
+.badge-facebook {
+    background-color: #1877f2;
+    color: #ffffff;
+}
+
+.badge-instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #ffffff;
+}
+
+.badge-whatsapp {
+    background-color: #25d366;
+    color: #ffffff;
+}

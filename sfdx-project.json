@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "OmniChannelSocialMessaging",
+      "versionName": "Spring 2026",
+      "versionNumber": "1.0.0.NEXT"
+    }
+  ],
+  "name": "OmniChannelSocialMessaging",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "59.0"
+}

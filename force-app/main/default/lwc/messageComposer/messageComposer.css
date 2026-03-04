@@ -1,0 +1,14 @@
+.composer-container {
+    border-top: 1px solid #e4e6eb;
+    background-color: #ffffff;
+}
+
+.reply-textarea textarea {
+    resize: none;
+    min-height: 60px;
+}
+
+.char-count {
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+}
