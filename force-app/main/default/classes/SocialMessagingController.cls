@@ -82,12 +82,51 @@ public with sharing class SocialMessagingController {
     }
 
     /**
+     * Builds the Instagram OAuth authorization URL for an admin to connect
+     * an Instagram Business account via Instagram Login (Instagram API with Instagram Login).
+     *
+     * The Social_Channel_Config__c record must have Instagram_App_Id__c and
+     * OAuth_Redirect_Uri__c populated before calling this.
+     *
+     * The returned URL should be opened in a browser (window.open / NavigationMixin).
+     * After the user grants permission Instagram redirects back to OAuth_Redirect_Uri__c
+     * with ?code=... which must be handled by the SocialOAuthCallbackController.
+     */
+    @AuraEnabled
+    public static String getInstagramAuthUrl(Id configId) {
+        Social_Channel_Config__c cfg = [
+            SELECT Instagram_App_Id__c, OAuth_Redirect_Uri__c
+            FROM Social_Channel_Config__c
+            WHERE Id = :configId
+            WITH SECURITY_ENFORCED
+            LIMIT 1
+        ];
+        if (String.isBlank(cfg.Instagram_App_Id__c)) {
+            throw new AuraHandledException(
+                'Instagram App ID is not set on this channel config record.'
+            );
+        }
+        if (String.isBlank(cfg.OAuth_Redirect_Uri__c)) {
+            throw new AuraHandledException(
+                'OAuth Redirect URI is not set on this channel config record.'
+            );
+        }
+        return InstagramOAuthService.buildAuthorizationUrl(
+            cfg.Instagram_App_Id__c,
+            cfg.OAuth_Redirect_Uri__c,
+            String.valueOf(configId)   // state param used as CSRF token
+        );
+    }
+
+    /**
      * Returns channel connection status from Social_Channel_Config__c.
+     * Includes token expiry info so the dashboard can warn about expiring tokens.
      */
     @AuraEnabled(cacheable=true)
     public static List<ChannelStatusWrapper> getChannelStatuses() {
         List<Social_Channel_Config__c> configs = [
-            SELECT Id, Name, Platform__c, Is_Active__c, Last_Verified_Date__c, Page_Name__c
+            SELECT Id, Name, Platform__c, Is_Active__c, Last_Verified_Date__c,
+                   Page_Name__c, Token_Expiry_Date__c
             FROM Social_Channel_Config__c
             WITH SECURITY_ENFORCED
             ORDER BY Platform__c
@@ -102,6 +141,9 @@ public with sharing class SocialMessagingController {
             s.isActive         = cfg.Is_Active__c;
             s.lastVerifiedDate = cfg.Last_Verified_Date__c;
             s.pageName         = cfg.Page_Name__c;
+            s.tokenExpiryDate  = cfg.Token_Expiry_Date__c;
+            s.tokenExpiringSoon = cfg.Token_Expiry_Date__c != null
+                && cfg.Token_Expiry_Date__c < DateTime.now().addDays(7);
             statuses.add(s);
         }
         return statuses;
@@ -134,5 +176,7 @@ public with sharing class SocialMessagingController {
         @AuraEnabled public Boolean  isActive;
         @AuraEnabled public DateTime lastVerifiedDate;
         @AuraEnabled public String   pageName;
+        @AuraEnabled public DateTime tokenExpiryDate;
+        @AuraEnabled public Boolean  tokenExpiringSoon;
     }
 }
