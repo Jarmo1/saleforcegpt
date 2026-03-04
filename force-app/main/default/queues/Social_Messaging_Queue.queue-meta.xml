@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>social-queue@example.com</email>
+    <label>Social Messaging Queue</label>
+    <name>Social_Messaging_Queue</name>
+    <queueMembers>
+        <publicGroups>
+            <member>AllInternalUsers</member>
+        </publicGroups>
+    </queueMembers>
+    <queueRoutingConfig>Social_Messaging_Routing</queueRoutingConfig>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QueueRoutingConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <capacityType>InProgressWork</capacityType>
+    <developerName>Social_Messaging_Routing</developerName>
+    <dropAdditionalSkillsTimeout>0</dropAdditionalSkillsTimeout>
+    <isAttributeBased>false</isAttributeBased>
+    <label>Social Messaging Routing Config</label>
+    <pushTimeout>120</pushTimeout>
+    <routingModel>LeastActive</routingModel>
+    <routingPriority>1</routingPriority>
+    <serviceChannels>
+        <channel>SocialMessagingChannel</channel>
+    </serviceChannels>
+    <unitType>Items</unitType>
+</QueueRoutingConfig>

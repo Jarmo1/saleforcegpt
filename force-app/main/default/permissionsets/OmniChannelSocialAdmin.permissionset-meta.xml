@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Full admin access for configuring social channels, webhooks, and Omni-Channel routing settings.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Omni-Channel Social Admin</label>
+    <userLicense>Salesforce</userLicense>
+
+    <!-- Apex class access -->
+    <classAccesses>
+        <apexClass>SocialMessagingController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OmniChannelRoutingService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SocialWebhookController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FacebookGraphAPIService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InstagramGraphAPIService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+
+    <!-- Full access to Social Channel Config -->
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Social_Channel_Config__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+
+    <!-- Case fields -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Platform__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Platform_User_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Last_External_Message_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- Social Channel Config fields -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Social_Channel_Config__c.Platform__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Social_Channel_Config__c.Is_Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Social_Channel_Config__c.Webhook_Verify_Token__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Social_Channel_Config__c.Page_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Social_Channel_Config__c.Last_Verified_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- Contact fields -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Social_Platform_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Social_Platform__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+</PermissionSet>

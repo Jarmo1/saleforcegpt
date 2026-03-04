@@ -1,0 +1,21 @@
+{
+  "name": "omnichannel-social-messaging",
+  "version": "1.0.0",
+  "description": "Salesforce Omni-Channel Social Messaging App - Facebook, Instagram & more",
+  "scripts": {
+    "deploy": "sf project deploy start --source-dir force-app",
+    "deploy:check": "sf project deploy start --source-dir force-app --dry-run",
+    "retrieve": "sf project retrieve start --source-dir force-app",
+    "test:apex": "sf apex run test --result-format human --output-dir test-results",
+    "open": "sf org open",
+    "lint": "eslint force-app/main/default/lwc/**/*.js"
+  },
+  "devDependencies": {
+    "@salesforce/eslint-config-lwc": "^3.5.3",
+    "@salesforce/sfdx-lwc-jest": "^3.0.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

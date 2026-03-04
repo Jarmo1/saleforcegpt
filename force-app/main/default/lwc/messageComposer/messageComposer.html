@@ -1,0 +1,33 @@
+<template>
+    <div class="composer-container slds-p-around_small">
+        <div class="slds-grid slds-gutters_xx-small slds-grid_vertical-align-end">
+            <div class="slds-col">
+                <lightning-textarea
+                    name="replyText"
+                    label="Reply"
+                    variant="label-hidden"
+                    placeholder={placeholderText}
+                    value={replyText}
+                    max-length="1000"
+                    onchange={handleTextChange}
+                    onkeydown={handleKeyDown}
+                    class="reply-textarea">
+                </lightning-textarea>
+            </div>
+            <div class="slds-col slds-no-flex">
+                <lightning-button-icon
+                    icon-name="utility:send"
+                    variant="brand"
+                    alternative-text="Send"
+                    title="Send (Ctrl+Enter)"
+                    disabled={isSendDisabled}
+                    onclick={handleSend}
+                    size="large">
+                </lightning-button-icon>
+            </div>
+        </div>
+        <p class="char-count slds-text-body_small slds-text-align_right slds-text-color_weak">
+            {replyText.length}/1000
+        </p>
+    </div>
+</template>
